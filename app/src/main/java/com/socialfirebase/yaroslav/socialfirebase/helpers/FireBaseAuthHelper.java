@@ -45,7 +45,16 @@ public class FireBaseAuthHelper {
     }
 
     public void signIn(AuthCredential credential) {
-        mFireBaseAuth.signInWithCredential(credential);
+        if (isAnonim()){
+            mFireBaseAuth.getCurrentUser().linkWithCredential(credential);
+        } else {
+            mFireBaseAuth.signInWithCredential(credential);
+        }
+    }
+
+    public void signInAnonim() {
+        Log.d(TAG, "firebase sign in");
+        mFireBaseAuth.signInAnonymously();
     }
 
     public void signOut() {
@@ -72,5 +81,9 @@ public class FireBaseAuthHelper {
         }
     }
 
+    private boolean isAnonim(){
+        return mFireBaseAuth.getCurrentUser() != null
+                && mFireBaseAuth.getCurrentUser().isAnonymous();
+    }
 
 }

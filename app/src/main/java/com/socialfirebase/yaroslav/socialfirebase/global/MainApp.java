@@ -4,6 +4,9 @@ import android.app.Application;
 import android.content.Intent;
 import android.util.Log;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.AuthCredential;
 import com.socialfirebase.yaroslav.socialfirebase.helpers.FireBaseAuthHelper;
 import com.socialfirebase.yaroslav.socialfirebase.view.HomeActivity;
@@ -40,11 +43,13 @@ public class MainApp extends Application {
 
     public void signIn(){
         Log.d(TAG, "Sign in");
+        mAuthHelper.signInAnonim();
     }
 
     public void signOut(){
         Log.d(TAG, "Sign out");
         mAuthHelper.signOut();
+        LoginManager.getInstance().logOut();
     }
 
     public void notifyLoginStatus(boolean loggedIn) {

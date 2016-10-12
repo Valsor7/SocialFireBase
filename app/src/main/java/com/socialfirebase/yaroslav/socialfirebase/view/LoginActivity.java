@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
@@ -12,17 +13,20 @@ import com.facebook.login.widget.LoginButton;
 import com.socialfirebase.yaroslav.socialfirebase.R;
 import com.socialfirebase.yaroslav.socialfirebase.global.Constants;
 import com.socialfirebase.yaroslav.socialfirebase.presenter.facebook.FacebookPresenter;
+import com.socialfirebase.yaroslav.socialfirebase.presenter.facebook.anonymous.AnonymousPresenter;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
     private FacebookPresenter fbLoginPresenter;
+    private AnonymousPresenter anonimLoginPresenter;
 
     @Bind(R.id.fb_loginButton)
     LoginButton fbButton;
@@ -40,6 +44,14 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         fbLoginPresenter = new FacebookPresenter(this);
+        anonimLoginPresenter = new AnonymousPresenter(this);
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                anonimLoginPresenter.signIn();
+            }
+        });
 
         initFacebook();
     }

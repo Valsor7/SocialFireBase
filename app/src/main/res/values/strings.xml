@@ -16,4 +16,5 @@
     </string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="home">Home</string>
+    <string name="post">Post:</string>
 </resources>
